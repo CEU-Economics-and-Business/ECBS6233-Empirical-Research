@@ -1,5 +1,5 @@
 # Empirical-Research
-Material Empirical Research
+This repo will contain material for the Empirical Research course.
 
 
 ## Course Description: 
