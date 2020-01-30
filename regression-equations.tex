@@ -1,0 +1,83 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[left=2.5cm,top=2cm,bottom=2cm,right=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}       % Add graphics capabilities
+\usepackage{amsmath} 
+        % Better maths support
+ \usepackage{natbib}    % bibliography style
+\setlength{\bibsep}{0.0pt}
+\bibliographystyle{agsm}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+%\usepackage{mitpress}
+\usepackage{amssymb}
+\usepackage[USenglish]{babel}
+%\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+%\usepackage{caption} 
+%\captionsetup[table]{skip=10pt}
+\usepackage{threeparttable}
+\usepackage{caption}
+
+\newtheorem{theorem}{Theorem}
+%\newtheorem{acknowledgement}{Acknowledgement}
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{assumption}{Assumption}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}{Case}
+\newtheorem{claim}{Claim}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{condition}{Condition}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{corollary}{Corollary}
+\newtheorem{criterion}{Criterion}
+%\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{lemma}{Lemma}
+\newtheorem{notation}{Notation}
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{solution}{Solution}
+\newtheorem{summary}{Summary}
+\newtheorem{fact}{Fact}
+
+\begin{document}
+\section{How to write out regression equations?}
+
+\begin{quote}
+We estimate the effect of foreign managers on firm performance in an annual firm panel. Outcomes at firm $i$ in year $t$ are modeled as
+\begin{equation}
+	y_{ist} = \beta F_{it} + \gamma \mathbf X_{it} + \alpha_i + \mu_{st} + \varepsilon_{ist},
+\end{equation}
+with $F_{it}$ denoting an indicator taking the value one when firm $i$ has a foreign manager in year $t$. The vector $\mathbf X_{it}$ denotes time varying firm controls. We also include firm fixed effects and sector-year fixed effects.
+\end{quote}
+
+Regression equations are mathematical equations, not notes to yourself. They should make sense as such. Use the rules below and always check whether the algebra in your equation is correct.
+
+\begin{enumerate}
+	\item Use the ``Kézdi notation'' for subscipts. Write out all dimensions that vary, even if they are related. $y_{ist}$ for firm $i$ in sector $s$ in year $t$, even though $s$ is, strictly speaking, a function of $i$ and $t$.
+	\item For right-hand side variables, take careful account of the dimensions that vary. $P_{st}$ for a sectoral price index, $F_{it}$ for a firm variable (I could not care less about industries at this stage, unless they directly affect $F_{it}$).
+	\item Always write out the error term. 
+	\item Variables are either single-letter variables or short words, but not both. Either $\gamma M_{it}$ or $\gamma \text{EXPAT}_{it}$, but never $\gamma M_{it}\text{EXPAT}_{it}$. 
+	\item If you use longer words, use the \texttt{\textbackslash text\{\}} command so that the letters don't fall apart. $\text{EXPAT}_{it}$ is a variable, $EXPAT_{it}$ is the product of five variables. Again, this is math.
+	\item Do not write out multiplication signs for interacted variables, we are used to reading mathematical formula like this. $M_{it}F_{jt}$, not $M_{it}*F_{jt}$. If you really must, to reduce complexity, use \texttt{\textbackslash cdot} or \texttt{\textbackslash times}, mot $*$.
+	\item The proper notation for fixed effects is a greek parameter indexed by what varies. For example, firm fixed effects are $\alpha_i$, not $FIRM_i$ (Is there such a variable called FIRM? What values does it take?), nor $\sum_j \alpha_j D_j$ (Since $D_j$ is zero for all other firms but $i=j$, this is the same as $\alpha_i$, just much harder to read.)
+
+	\item Interacted fixed effects are $\mu_{st}$, not $\mu_s\mu_t$. Think about what your regression is doing mathematically.
+
+	\item Don't use the same greek letter for different parameters, even for fixed effects. For example, $\alpha_i + \alpha_t$ would algeabraically mean that the time effect for year 1997 is the same as the firm effect for firm 1997. That is surely not what you meant to say.
+
+	\item If you are controlling for a non-parametric function, feel free to write $f(\text{age}_{it})$, for example. This is ok for polynomials, lowess, kernel, spline, binscatter, anything that is a function of $\text{age}_{it}$.
+
+	\item Use punctutation as you would in a sentence.
+\end{enumerate}
+
+\end{document} 
