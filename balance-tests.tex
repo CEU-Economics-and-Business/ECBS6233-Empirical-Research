@@ -28,22 +28,25 @@
 \maketitle
 %\section{}
 %\subsection{}
-Let  $Y_i $ be a continuous, or discrete, variable and  $ T_i $ a dummy variable which takes either values one or zero with probability $p$ and $1-p$, respectively. A regression of $Y_i $ on $T_i$ and a constant is equivalent to comparing means for the two groups, one with values of $T=0$ and the other with values of $T=1$. It can be shown that:
+Let  $Y_i $ be a continuous (or discrete) variable and  $ T_i $ a dummy variable which takes either values one or zero with probability $p$ and $1-p$, respectively. A regression of $Y_i $ on $T_i$ and a constant is equivalent to comparing means for the two groups (one with values of $T=0$ and the other with values of $T=1$). It can be shown that:
 
 
  \begin{align*}
-\beta = \frac{cov[Y, T]}{var(T)}=\frac{p(1-p)(E[Y_i|T_i=1]- E[Y_i|T_i=0])}{p(1-p)}=E[Y_i|T_i=1]- E[Y_i|T_i=0]
+	\beta = \frac{cov[Y, T]}{var(T)}=\frac{p(1-p)(E[Y_i|T_i=1]- E[Y_i|T_i=0])}{p(1-p)}=E[Y_i|T_i=1]- E[Y_i|T_i=0]
  \end{align*}
 
 In case of endogenous regressor, mean comparison and linear regression suffer from the same bias. To see this:
 
  \begin{align*}
- E[Y_i|T_i=1] &=&  \alpha +  \beta  +  E[\varepsilon_i|T_i=1] \\
- E[Y_i|T_i=0] &=&  \alpha  + E[\varepsilon_i|T_i=0]\\
- E[Y_i|T_i=1]- E[Y_i|T_i=0] &= &  \beta +  \underset{\text{selection bias}}{\underbrace{ E[\varepsilon_i|T_i=1] -   E[\varepsilon_i|T_i=0] }}
+ 	E[Y_i|T_i=1] &=&  \alpha +  \beta  +  E[\varepsilon_i|T_i=1] \\
+ 	E[Y_i|T_i=0] &=&  \alpha  + E[\varepsilon_i|T_i=0]\\
+ 	E[Y_i|T_i=1]- E[Y_i|T_i=0] &= &  \beta +  \underset{\text{selection bias}}{\underbrace{ E[\varepsilon_i|T_i=1] -   E[\varepsilon_i|T_i=0] }}
  \end{align*}
+ 
+\newpage
 
- A numerical example is shown in Table \ref{t: selection} with replication material on \href{https://github.com/CEU-Economics-and-Business/ECBS6233-Empirical-Research/tree/master/code}{GitHub}.\\
+ A numerical example is shown in Table \ref{t: selection}. Each column denotes a different relationship between $Y$ on $T$. In the top part of the table, the row corresponding to $T$, depicts coefficient estimate (and standard error in parenthesis) from a regression of $Y$ on $T$.  In the bottom part of the table the mean difference between the two groups, namely those with $T=1$ and $T=0$, as well as the corresponding standard error are shown. 
+ Try it for yourself, the replication material is on  \href{https://github.com/CEU-Economics-and-Business/ECBS6233-Empirical-Research/tree/master/code}{GitHub}.
 
 \begin{table} [H]
 \begin{center}
@@ -57,14 +60,14 @@ In case of endogenous regressor, mean comparison and linear regression suffer fr
 \par
 \begin{minipage}{0.8\linewidth}
 \baselineskip10pt
-{\scriptsize {Notes:  The relationship between Y and T is $ Y=0.5+ 0.7 \cdot T+ \varepsilon $ in column (1), $ Y=0.5+ 0.7 \cdot T+0.3* X_1 + \varepsilon $ in column (2) and $ Y=0.5+ 0.7 \cdot T+0.15* X_2 + \varepsilon $ where $X_2$ is itself a linear function of $X_1$. The coefficient estimate and standard error in parenthesis, shown in the top part of the table are from a regression of $Y$ on $T$. In the bottom part of the table the mean difference between the two groups, those with $T=1$ and $T=0$, as well as the corresponding standard error is shown.}}
+{\scriptsize {Notes:  The relationship between Y and T is $ Y=0.5+ 0.7 \cdot T+ \varepsilon $ in column (1), $ Y=0.5+ 0.7 \cdot T+0.3* X_1 + \varepsilon $ in column (2), and in column (3) $ Y=0.5+ 0.7 \cdot T+0.15* X_2 + \varepsilon $ where $X_2$ is itself a linear function of $X_1$.}}
 \end{minipage}
 \end{center}
 \end{table}
 
 \newpage
 
-A covariate balance test helps us understand if treatment and control group are actually comparable. The variables to include in a balancing test are these variables which are usually measured pre-treatment. See Figure  \ref{fig:tikz} for a visual representation. Geographical variables such as latitude, longitude, altitude, ruggedness, distance, surface are also unlikely to be affected by the treatment and can be included in a balance test. \\
+A covariate balance test helps us understand if treatment and control group are actually comparable. The variables to include in a balancing test are usually measured pre-treatment. See Figure  \ref{fig:tikz} for a visual representation. Geographical variables such as latitude, longitude, altitude, ruggedness, distance, surface are also unlikely to be affected by the treatment and can be included in a balance test. \\
 
 
 \begin{figure}[H]
@@ -90,15 +93,11 @@ A covariate balance test helps us understand if treatment and control group are 
 \end{figure}
 
 
-\vspace{1cm}
+If the variables are measured post-treatment, it's likely they are affected by the treatment, therefore they should not be included in a balancing test; they are outcomes. \\
 
-
-If the variables are measured post-treatment, it's likely they are affected by the treatment, therefore they should not be included in a balancing test as they are outcomes. \\
-
-We encourage you to use visual representations to show covariate balance if possible. A nice example of pre and post mean comparison is shown in Figure \ref{fig:aej} where raw means are plotted before and after treatment. An alternative way would be using coefficient plots.
+We encourage you to use visual representations to show covariate balance if possible. A nice example of pre and post mean comparison is shown in Figure \ref{fig:aej} where raw means are plotted before and after treatment. An alternative way is showing coefficient plots. Feel free to experiment alternative options and be creative.
 
 \begin{figure} [H]
-\vspace{0.5cm}
 \begin{center}
 \caption{\label{fig:aej} Incentives, commitments, and habit formation}
 \includegraphics[width=120 mm, height=60 mm]{output/figures/Habit_Formation_Exercise.png} 
@@ -115,7 +114,7 @@ We encourage you to use visual representations to show covariate balance if poss
 
 
 
-In many cases, it makes sense to have a mean comparison controlling for other factors. For example, if the assignment is stratified, you would want to look the regression coefficient once you have controlled for other stuff i.e include school fixed, $ \eta_s $, effects because the treatment is stratified at the school level. $\rho$ is the parameter of interest.
+In many cases, it makes sense to have a mean comparison controlling for other factors. For example, if the assignment is stratified, you would want to look at the regression coefficient once you have controlled for other factors i.e include school fixed effects, $ \eta_s $, because the treatment is stratified at the school level.  $\rho$ is the parameter of interest.
 
 
 \begin{align*}
